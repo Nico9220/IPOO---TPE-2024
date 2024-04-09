@@ -12,8 +12,8 @@ function menu() {
     echo "1. Cargar información del viaje\n";
     echo "2. Modificar información del viaje\n";
     echo "3. Ver información del viaje\n";
-    echo "4. Agregar pasajero\n";
-    echo "5. Agregar responsable\n";
+    echo "4. Agregar responsable\n";
+    echo "5. Agregar pasajero\n";
     echo "6. Salir\n";
     echo "Seleccione una opción: ";
 }
@@ -67,7 +67,38 @@ function principal($objPasajeros, $objResponsableV){
                     echo "Primero debe cargar la información del viaje.\n";
                 }
                 break;
-            case '4':
+
+                case '4':
+                    // Agregar responsable al viaje
+                    if($viaje){
+                        echo "Agregar responsable al viaje\n";
+                        // Solicitar información del nuevo responsable
+                        echo "Ingrese el codigo de Empleado: ";
+                        $idEmpleado = trim(fgets(STDIN));
+                        echo "Ingrese su Licencia: ";
+                        $idLicencia = trim(fgets(STDIN));
+                        echo "Ingrese el nombre: ";
+                        $nombreEmpleado = trim(fgets(STDIN));
+                        echo "Ingrese su apellido: ";
+                        $apellidoEmpleado = trim(fgets(STDIN));
+                    
+                        //instanciamos el objeto
+                        $nuevoResponsable = new ResponsableV($idEmpleado, $idLicencia, $nombreEmpleado, $apellidoEmpleado);
+                    
+                        // Se agrega al nuevo responsable al viaje
+                        $responsableAgregado = $viaje->agregarResponsableV($nuevoResponsable);
+                    
+                        if($responsableAgregado) {
+                            echo "Responsable agregado con éxito al viaje.\n";
+                        } else {
+                            echo "Ya existe un responsable asignado al viaje.\n";
+                        }
+                    } else {
+                        echo "Primero debe cargar la información del viaje.\n";
+                    }
+                    break;
+
+            case '5':
                 if($viaje){
                     echo "Agregar pasajero al viaje\n";
 
@@ -103,17 +134,17 @@ function principal($objPasajeros, $objResponsableV){
                     echo "2. Eliminar pasajero\n";
                     echo "Seleccione una opción: ";
                     $opcionAccion = trim(fgets(STDIN));
+                    switch ($opcionAccion) {
 
-        switch ($opcionAccion) {
-            case '1':
-                // Modificar pasajero
-                if ($viaje !== null) {
-                    echo "Ingrese el documento del pasajero a modificar: ";
-                    $documentoModificar = trim(fgets(STDIN));
+                        case '1':
+                        // Modificar pasajero
+                        if ($viaje !== null) {
+                        echo "Ingrese el documento del pasajero a modificar: ";
+                        $documentoModificar = trim(fgets(STDIN));
                     
-                    // Buscar el índice del pasajero por su número de documento
-                    $indiceModificar = null;
-                    foreach ($viaje->getObjPasajeros() as $indice => $pasajero) {
+                        // Buscar el índice del pasajero por su número de documento
+                        $indiceModificar = null;
+                        foreach ($viaje->getObjPasajeros() as $indice => $pasajero) {
                         if ($pasajero->getDocumento() == $documentoModificar) {
                             $indiceModificar = $indice;
                             break;
@@ -144,9 +175,9 @@ function principal($objPasajeros, $objResponsableV){
                     echo "Primero debe cargar la información del viaje.\n";
                 }
                 break;
-            case '2':
-                // Eliminar pasajero
-                if ($viaje !== null) {
+                        case '2':
+                    // Eliminar pasajero
+                    if ($viaje !== null) {
                     echo "Ingrese el documento del pasajero a eliminar: ";
                     $documentoEliminar = trim(fgets(STDIN));
                     
@@ -173,36 +204,7 @@ function principal($objPasajeros, $objResponsableV){
                     echo "Primero debe cargar la información del viaje.\n";
                 }
                 break;
-                
-            case '5':
-                // Agregar responsable al viaje
-                if($viaje){
-                    echo "Agregar responsable al viaje\n";
-                    // Solicitar información del nuevo responsable
-                    echo "Ingrese el codigo de Empleado: ";
-                    $idEmpleado = trim(fgets(STDIN));
-                    echo "Ingrese su Licencia: ";
-                    $idLicencia = trim(fgets(STDIN));
-                    echo "Ingrese el nombre: ";
-                    $nombreEmpleado = trim(fgets(STDIN));
-                    echo "Ingrese su apellido: ";
-                    $apellidoEmpleado = trim(fgets(STDIN));
-                
-                    //instanciamos el objeto
-                    $nuevoResponsable = new ResponsableV($idEmpleado, $idLicencia, $nombreEmpleado, $apellidoEmpleado);
-                
-                    // Se agrega al nuevo responsable al viaje
-                    $responsableAgregado = $viaje->agregarResponsableV($nuevoResponsable);
-                
-                    if($responsableAgregado) {
-                        echo "Responsable agregado con éxito al viaje.\n";
-                    } else {
-                        echo "Ya existe un responsable asignado al viaje.\n";
-                    }
-                } else {
-                    echo "Primero debe cargar la información del viaje.\n";
-                }
-                break;
+
             case '6':
                 // Salir
                 echo "Saliendo del programa...\n";
