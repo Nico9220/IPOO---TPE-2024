@@ -1,6 +1,6 @@
 # IPOO---TPE-2024
 
-#Consigna TPE
+# Consigna TPE
 
 La empresa de Transporte de Pasajeros “Viaje Feliz” quiere registrar la información referente a sus viajes. De cada viaje se precisa almacenar el código del mismo, destino, cantidad máxima de pasajeros y los pasajeros del viaje.
 
