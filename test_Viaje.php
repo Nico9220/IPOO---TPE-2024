@@ -69,7 +69,7 @@ function principal($objPasajeros, $objResponsableV){
                 break;
 
                 case '4':
-                    // Agregar responsable al viaje
+                    // Agregamos responsable al viaje
                     if($viaje){
                         echo "Agregar responsable al viaje\n";
                         // Solicitar información del nuevo responsable
@@ -99,6 +99,7 @@ function principal($objPasajeros, $objResponsableV){
                     break;
 
             case '5':
+                //agregamos el pasajero
                 if($viaje){
                     echo "Agregar pasajero al viaje\n";
 
@@ -176,12 +177,12 @@ function principal($objPasajeros, $objResponsableV){
                 }
                 break;
                         case '2':
-                    // Eliminar pasajero
+                    // Eliminamos pasajero
                     if ($viaje !== null) {
                     echo "Ingrese el documento del pasajero a eliminar: ";
                     $documentoEliminar = trim(fgets(STDIN));
                     
-                    // Buscar el índice del pasajero por su número de documento
+                    // Buscamos el índice del pasajero por su número de documento
                     $indiceEliminar = null;
                     foreach ($viaje->getObjPasajeros() as $indice => $pasajero) {
                         if ($pasajero->getDocumento() == $documentoEliminar) {
@@ -191,7 +192,6 @@ function principal($objPasajeros, $objResponsableV){
                     }
                     
                     if ($indiceEliminar !== null) {
-                        // Llamar a la función eliminarPasajero() pasando el índice
                         if ($viaje->eliminarPasajero($indiceEliminar)) {
                             echo "Pasajero eliminado con éxito.\n";
                         } else {

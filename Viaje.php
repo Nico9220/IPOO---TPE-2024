@@ -70,7 +70,7 @@ class Viaje{
         $pasajeroExiste = false;
         $cantidadMaximaAlcanzada = false;
     
-        // Verificamos si el pasajero ya está en la lista
+        //Verificamos si el pasajero ya está en la lista
         foreach ($this->objPasajeros as $p) {
             if ($p->getDocumento() === $pasajero->getDocumento()) {
                 $pasajeroExiste = true;
@@ -78,18 +78,18 @@ class Viaje{
             }
         }
     
-        // Verificamos si se supera la cantidad máxima de pasajeros
+        //Verificamos si se supera la cantidad máxima de pasajeros
         if (count($this->objPasajeros) >= $this->cantMaxPasajeros) {
             $cantidadMaximaAlcanzada = true;
         }
     
-        // Si el pasajero ya existe o se superó la cantidad máxima, no se puede agregar
+        //Si el pasajero ya existe o se superó la cantidad máxima, no se puede agregar
 
         if ($pasajeroExiste || $cantidadMaximaAlcanzada) {
             return false;
         }
     
-        // Si no se cumplieron las condiciones anteriores, agregamos el pasajero y retornamos true
+        //Si no se cumplieron las condiciones anteriores, agregamos el pasajero y retornamos true
         $this->objPasajeros[] = $pasajero;
         return true;
     }
@@ -126,9 +126,14 @@ class Viaje{
     }
 
     public function agregarResponsableV($responsable) {
-        if ($this->objResponsableV === null) {
-            $this->objResponsableV = $responsable;
-        }
+        $responsableCargado = false;
+            if ($this->objResponsableV === $responsable) {
+                $responsableCargado = true;
+            }else{
+                $this->objResponsableV = $responsable;
+            }
+        
+        return $responsableCargado;
     }
 
     public function eliminarResponsable(){
