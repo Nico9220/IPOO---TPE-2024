@@ -17,14 +17,14 @@ class Viaje{
     private $codigoViaje;
     private $destino;
     private $cantMaxPasajeros;
-    private $objPasajeros;
+    private $objPasajero;
     private $objResponsableV;
 
-    public function __construct($codigoViajeInput, $destinoInput, $cantMaxPasajerosInput, $objPasajeros, $objResponsableV){
+    public function __construct($codigoViajeInput, $destinoInput, $cantMaxPasajerosInput, $objPasajero, $objResponsableV){
         $this->codigoViaje = $codigoViajeInput;
         $this->destino = $destinoInput;
         $this->cantMaxPasajeros = $cantMaxPasajerosInput;
-        $this->objPasajeros = [];
+        $this->objPasajero = [];
         $this->objResponsableV = $objResponsableV;
     }
 
@@ -40,7 +40,7 @@ class Viaje{
         return $this->cantMaxPasajeros;
     }
     public function getObjPasajeros(){
-        return $this->objPasajeros;
+        return $this->objPasajero;
     }
     public function getObjResponsableV(){
         return $this->objResponsableV;
@@ -57,8 +57,8 @@ class Viaje{
     public function setCantMaxPasajeros($cantMaxPasajerosInput){
         $this->cantMaxPasajeros = $cantMaxPasajerosInput;
     }
-    public function setPasajeros($objPasajeros){
-        $this->objPasajeros = $objPasajeros;
+    public function setPasajeros($objPasajero){
+        $this->objPasajero = $objPasajero;
     }
     public function setObjResponsableV($objResponsableV){
         $this->objResponsableV = $objResponsableV;
@@ -71,7 +71,7 @@ class Viaje{
         $cantidadMaximaAlcanzada = false;
     
         //Verificamos si el pasajero ya está en la lista
-        foreach ($this->objPasajeros as $p) {
+        foreach ($this->objPasajero as $p) {
             if ($p->getDocumento() === $pasajero->getDocumento()) {
                 $pasajeroExiste = true;
                 break;
@@ -79,7 +79,7 @@ class Viaje{
         }
     
         //Verificamos si se supera la cantidad máxima de pasajeros
-        if (count($this->objPasajeros) >= $this->cantMaxPasajeros) {
+        if (count($this->objPasajero) >= $this->cantMaxPasajeros) {
             $cantidadMaximaAlcanzada = true;
         }
     
@@ -90,18 +90,18 @@ class Viaje{
         }
     
         //Si no se cumplieron las condiciones anteriores, agregamos el pasajero y retornamos true
-        $this->objPasajeros[] = $pasajero;
+        $this->objPasajero[] = $pasajero;
         return true;
     }
 
     //Modificamos los datos de un pasajero
     public function modificarPasajero($indice, $nombre, $apellido, $numeroDocumento, $telefono) {
         $modificado = false;
-        if (isset($this->objPasajeros[$indice])) {
-            $this->objPasajeros[$indice]->setNombre($nombre);
-            $this->objPasajeros[$indice]->setApellido($apellido);
-            $this->objPasajeros[$indice]->setDocumento($numeroDocumento);
-            $this->objPasajeros[$indice]->setTelefono($telefono);
+        if (isset($this->objPasajero[$indice])) {
+            $this->objPasajero[$indice]->setNombre($nombre);
+            $this->objPasajero[$indice]->setApellido($apellido);
+            $this->objPasajero[$indice]->setDocumento($numeroDocumento);
+            $this->objPasajero[$indice]->setTelefono($telefono);
             $modificado = true;
         }
         return $modificado;
@@ -110,8 +110,8 @@ class Viaje{
 
     public function eliminarPasajero($indice) {
         $eliminado = false;
-        if (isset($this->objPasajeros[$indice])) {
-            array_splice($this->objPasajeros, $indice, 1);
+        if (isset($this->objPasajero[$indice])) {
+            array_splice($this->objPasajero, $indice, 1);
             $eliminado = true;
         }
         return $eliminado;

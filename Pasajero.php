@@ -5,7 +5,7 @@
  * Implementar las operaciones que permiten modificar el nombre, apellido y teléfono de un pasajero.
  */
 
-class Pasajeros{
+class Pasajero{
     private $nombre;
     private $apellido;
     private $documento;

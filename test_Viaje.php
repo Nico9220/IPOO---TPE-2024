@@ -1,12 +1,12 @@
 <?php
 
 include_once 'Viaje.php';
-include_once 'Pasajeros.php';
+include_once 'Pasajero.php';
 include_once 'ResponsableV.php';
 
-$objPasajeros = new Pasajeros ("Nicolas", "Caretta", 36329071, 154769210);
+$objPasajero = new Pasajero ("Nicolas", "Caretta", 36329071, 154769210);
 $objResponsableV = new ResponsableV (369, 071, "Ependimo", "Gonzalez");
-$objViaje = new Viaje(333, "Cancun", 100, $objPasajeros, $objResponsableV);
+$objViaje = new Viaje(333, "Cancun", 100, $objPasajero, $objResponsableV);
 
 function menu() {
     echo "1. Cargar información del viaje\n";
@@ -18,7 +18,7 @@ function menu() {
     echo "Seleccione una opción: ";
 }
 
-function principal($objPasajeros, $objResponsableV){
+function principal($objPasajero, $objResponsableV){
     $viaje = null;
     $continuar = true;
 
@@ -35,7 +35,7 @@ function principal($objPasajeros, $objResponsableV){
                 $destino = trim(fgets(STDIN));
                 echo "Ingrese cantidad máxima de pasajeros: ";
                 $cantMaxPasajeros = trim(fgets(STDIN));
-                $viaje = new Viaje($codigo, $destino, $cantMaxPasajeros, $objPasajeros, $objResponsableV);
+                $viaje = new Viaje($codigo, $destino, $cantMaxPasajeros, $objPasajero, $objResponsableV);
                 echo "Viaje registrado con éxito.\n";
                 break;
             case '2':
@@ -112,7 +112,7 @@ function principal($objPasajeros, $objResponsableV){
                     echo "Ingrese el teléfono del pasajero: ";
                     $telefonoPasajero = trim(fgets(STDIN));
                     
-                    $nuevoPasajero = new Pasajeros($nombrePasajero, $apellidoPasajero, $documentoPasajero, $telefonoPasajero);
+                    $nuevoPasajero = new Pasajero($nombrePasajero, $apellidoPasajero, $documentoPasajero, $telefonoPasajero);
                     
                     // Agregar el nuevo pasajero al viaje
                     $pasajeroAgregado = $viaje->agregarPasajero($nuevoPasajero);
@@ -163,7 +163,7 @@ function principal($objPasajeros, $objResponsableV){
                         echo "Ingrese el nuevo teléfono del pasajero: ";
                         $nuevoTelefono = trim(fgets(STDIN));
                         
-                        // Llamar a la función modificarPasajero() pasando el índice y los nuevos datos
+                        // Llamo función modificarPasajero() pasando el índice y los nuevos datos
                         if ($viaje->modificarPasajero($indiceModificar, $nuevoNombre, $nuevoApellido, $nuevoDocumento, $nuevoTelefono)) {
                             echo "Pasajero modificado con éxito.\n";
                         } else {
@@ -184,7 +184,7 @@ function principal($objPasajeros, $objResponsableV){
                     
                     // Buscamos el índice del pasajero por su número de documento
                     $indiceEliminar = null;
-                    foreach ($viaje->getObjPasajeros() as $indice => $pasajero) {
+                    foreach ($viaje->getObjPasajero() as $indice => $pasajero) {
                         if ($pasajero->getDocumento() == $documentoEliminar) {
                             $indiceEliminar = $indice;
                             break;
@@ -218,5 +218,5 @@ function principal($objPasajeros, $objResponsableV){
     }
 }
 }
-principal($objPasajeros, $objResponsableV);
+principal($objPasajero, $objResponsableV);
 ?>
