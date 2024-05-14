@@ -2,6 +2,7 @@
 
 /*
 La clase "PasajeroVIP" tiene como atributos adicionales el número de viajero frecuente y cantidad de millas de pasajero.
+Para un pasajero VIP se incrementa el importe un 35% y si la cantidad de millas acumuladas supera a las 300 millas se realiza un incremento del 30%.
 */
 
 class PasajeroVip extends Pasajero {
@@ -28,6 +29,15 @@ class PasajeroVip extends Pasajero {
     }
     public function setCantidadMillas($cantidadMillas){
         $this->cantidadMillas = $cantidadMillas;
+    }
+
+    public function darPorcentajeIncremento()
+    {
+        $incremento = 35;
+        if ($this->getCantidadMillas() > 300){
+            $incremento += 30;
+        }
+        return $incremento;
     }
 
     public function __toString(){

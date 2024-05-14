@@ -3,6 +3,8 @@
 /**
  * Modificar la clase Viaje para que ahora los pasajeros sean un objeto que tenga los atributos nombre, apellido, numero de documento y teléfono.
  * Implementar las operaciones que permiten modificar el nombre, apellido y teléfono de un pasajero.
+ * 
+ * Implementar el método darPorcentajeIncremento() que retorne el porcentaje que debe aplicarse como incremento según las características del pasajero
  */
 
 class Pasajero{
@@ -46,6 +48,13 @@ class Pasajero{
     }
     public function setTelefono($telefonoInput){
         $this->telefono = $telefonoInput;
+    }
+
+    //Implementar el método darPorcentajeIncremento() que retorne el porcentaje que debe aplicarse como incremento según las características del pasajero
+
+    public function darPorcentajeIncremento(){
+        $incremento = 10;
+        return $incremento;
     }
 
     public function __toString(){

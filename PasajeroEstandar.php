@@ -38,6 +38,12 @@ class PasajeroEstandar extends Pasajero {
         $this->numeroTicket = $numeroTicket;
     }
 
+    public function darPorcentajeIncremento()
+    {
+        $incremento = parent :: darPorcentajeIncremento();
+        return $incremento;
+    }
+
     public function __toString(){
         $cadena = parent :: __toString();
         $cadena .= "Numero de asiento: " . $this->getNumeroAsiento() . "\n" . 

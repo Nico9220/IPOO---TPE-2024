@@ -4,9 +4,10 @@ include_once 'Viaje.php';
 include_once 'Pasajero.php';
 include_once 'ResponsableV.php';
 
+
 $objPasajero = new Pasajero ("Nicolas", "Caretta", 36329071, 154769210);
 $objResponsableV = new ResponsableV (369, 071, "Ependimo", "Gonzalez");
-$objViaje = new Viaje(333, "Cancun", 100, $objPasajero, $objResponsableV);
+$objViaje = new Viaje(333, "Cancun", 100, $objPasajero, $objResponsableV, 500, 450);
 
 function menu() {
     echo "1. Cargar información del viaje\n";
@@ -25,7 +26,7 @@ function principal($objPasajero, $objResponsableV){
     while($continuar){
         menu();
     
-        $opcion = readline();
+        $opcion = trim(fgets(STDIN));
 
         switch ($opcion){
             case '1':
@@ -35,7 +36,11 @@ function principal($objPasajero, $objResponsableV){
                 $destino = trim(fgets(STDIN));
                 echo "Ingrese cantidad máxima de pasajeros: ";
                 $cantMaxPasajeros = trim(fgets(STDIN));
-                $viaje = new Viaje($codigo, $destino, $cantMaxPasajeros, $objPasajero, $objResponsableV);
+                echo "Ingrese el costo del Viaje: ";
+                $costoViaje = trim(fgets(STDIN));
+                echo "Ingrese el costo abonado: ";
+                $costoAbonado = trim(fgets(STDIN));
+                $viaje = new Viaje($codigo, $destino, $cantMaxPasajeros, $objPasajero, $objResponsableV, $costoViaje, $costoAbonado);
                 echo "Viaje registrado con éxito.\n";
                 break;
             case '2':
@@ -184,7 +189,7 @@ function principal($objPasajero, $objResponsableV){
                     
                     // Buscamos el índice del pasajero por su número de documento
                     $indiceEliminar = null;
-                    foreach ($viaje->getObjPasajero() as $indice => $pasajero) {
+                    foreach ($viaje->getObjPasajeros() as $indice => $pasajero) {
                         if ($pasajero->getDocumento() == $documentoEliminar) {
                             $indiceEliminar = $indice;
                             break;
@@ -218,5 +223,4 @@ function principal($objPasajero, $objResponsableV){
     }
 }
 }
-principal($objPasajero, $objResponsableV);
 ?>
